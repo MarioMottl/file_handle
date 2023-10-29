@@ -35,7 +35,9 @@ class TestFileHandle:
 
     def test_create_backup(self):
         source_path = self.valid_file_path
-        assert FileHandle.create_backup(source_path)
+        backup_path = FileHandle.create_backup(source_path)
+        assert backup_path.exists()
+        assert backup_path.is_file()
 
     def test_validate_paths(self):
         # Test valid paths

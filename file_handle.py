@@ -95,7 +95,7 @@ class FileHandle:
         """
         try:
             backup_path = path.with_suffix(".bak")
-            shutil.copy2(path, backup_path)
+            FileHandle.copy(path, backup_path)
             return backup_path
         except OSError as error:
             logging.error(f"{error.errno} - {error.strerror} - {error.filename}")
