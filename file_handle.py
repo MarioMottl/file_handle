@@ -167,7 +167,9 @@ class FileHandle:
         copy_func(source, destination)
 
     @staticmethod
-    def upload(source: pathlib.Path, destination: pathlib.Path) -> Optional[bool]:
+    def upload(
+        source: pathlib.Path, destination: pathlib.Path, copy_func: Callable = copy
+    ) -> Optional[bool]:
         """
         Upload a file or directory from the source path to the destination path.
 
@@ -180,11 +182,13 @@ class FileHandle:
             DestinationNotValidError: If the destination path is not valid and cannot be created.
             OSError: If there is an error during the file or directory copy operation.
         """
-        FileHandle.transfer(source, destination, FileHandle.copy)
+        FileHandle.transfer(source, destination, copy_func)
         return True
 
     @staticmethod
-    def download(source: pathlib.Path, destination: pathlib.Path) -> Optional[bool]:
+    def download(
+        source: pathlib.Path, destination: pathlib.Path, copy_func: Callable = copy
+    ) -> Optional[bool]:
         """
         Download a file or directory from the source path to the destination path.
 
@@ -197,5 +201,5 @@ class FileHandle:
             DestinationNotValidError: If the destination path is not valid and cannot be created.
             OSError: If there is an error during the file or directory copy operation.
         """
-        FileHandle.transfer(source, destination, FileHandle.copy)
+        FileHandle.transfer(source, destination, copy_func)
         return True
